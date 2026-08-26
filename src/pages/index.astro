@@ -1,0 +1,344 @@
+---
+import { Image } from 'astro:assets';
+import togetherPhoto from '../assets/images/mahadi-mehran-together.jpg';
+import mahadiPhoto from '../assets/images/mahadi-hasan.jpg';
+import mehranPhoto from '../assets/images/mehran-hasan.jpg';
+import '../styles/global.css';
+
+const pageTitle = 'Mahadi & Mehran — A Digital Legacy';
+const description = 'The living family archive of MD Mahadi Hasan (Tonmoy) and his son, MD Mehran Hasan (Turaj)—their roots, education, family, and story.';
+const canonical = Astro.url.origin;
+const ogImage = new URL('/og.png', Astro.url).toString();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${canonical}/#mahadi`,
+      name: 'MD Mahadi Hasan',
+      alternateName: 'Tonmoy',
+      alumniOf: [
+        { '@type': 'CollegeOrUniversity', name: 'Henan Polytechnic University' },
+        { '@type': 'CollegeOrUniversity', name: 'Nanjing Normal University' },
+      ],
+      sameAs: [
+        'https://www.linkedin.com/in/mahadihanshan/',
+        'https://ieeexplore.ieee.org/author/37089463675',
+      ],
+      children: { '@id': `${canonical}/#mehran` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${canonical}/#mehran`,
+      name: 'MD Mehran Hasan',
+      alternateName: 'Turaj',
+      birthDate: '2025-06-15',
+      parent: { '@id': `${canonical}/#mahadi` },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="color-scheme" content="dark" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="MD Mahadi Hasan" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="Mahadi and Mehran, a digital legacy" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to story</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Mahadi and Mehran, home">
+        <span>MAHADI</span><span>× MEHRAN</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#legacy">Legacy</a>
+        <a href="#family">Family</a>
+        <button class="nav-archive" type="button" data-open-archive>Archive <span aria-hidden="true">↗</span></button>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="kicker"><span>EST.</span> 15 · 06 · 2025</p>
+          <h1>A story that<br /><em>outlives distance.</em></h1>
+          <p class="hero-intro">
+            A digital legacy from a father to his son—so our names, our roots,
+            and the love between us remain easy to find.
+          </p>
+          <a class="button button-red" href="#legacy">Begin our story <span aria-hidden="true">↓</span></a>
+        </div>
+
+        <figure class="hero-photo collage-photo">
+          <div class="photo-mat">
+            <Image
+              src={togetherPhoto}
+              alt="Mahadi Hasan resting beside his infant son Mehran"
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 820px) 92vw, 43vw"
+              loading="eager"
+              quality={80}
+              format="webp"
+            />
+          </div>
+          <figcaption>Father & son <span>·</span> Bangladesh</figcaption>
+        </figure>
+
+        <p class="vertical-note">MEMORY / ROOTS / LOVE / LEGACY</p>
+        <div class="red-orbit" aria-hidden="true"></div>
+        <div class="infinity-mark" aria-hidden="true">∞</div>
+      </section>
+
+      <section class="letter" id="legacy">
+        <div class="section-index">
+          <span>01</span>
+          <p>A NOTE FOR THE FUTURE</p>
+        </div>
+        <div class="letter-copy">
+          <p class="display-quote">
+            “If the years place miles between us, <em>search our names.</em>
+            This is where our story waits.”
+          </p>
+          <p class="letter-body">
+            This archive is a promise: that Mehran can always return to the
+            people, places, and history that shaped him. It records a father’s
+            path, a son’s beginning, and the family roots that belong to both.
+          </p>
+          <p class="signature">— Mahadi, for Mehran</p>
+        </div>
+      </section>
+
+      <section class="profiles" aria-label="Father and son profiles">
+        <article class="profile profile-mahadi">
+          <figure class="profile-image">
+            <Image
+              src={mahadiPhoto}
+              alt="Portrait of MD Mahadi Hasan at Nanjing Normal University"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 820px) 100vw, 42vw"
+              loading="lazy"
+              quality={78}
+              format="webp"
+            />
+            <span class="photo-number">01 / FATHER</span>
+          </figure>
+          <div class="profile-content">
+            <p class="label">THE FATHER</p>
+            <h2>MD Mahadi Hasan <em>“Tonmoy”</em></h2>
+            <p class="profile-lede">Computer scientist, researcher, son of Ramanandapur—and the keeper of this archive.</p>
+            <div class="timeline">
+              <div>
+                <time>2017—2021</time>
+                <p><strong>Bachelor of Engineering</strong><br />Computer Science and Technology<br />Henan Polytechnic University, China</p>
+              </div>
+              <div>
+                <time>2025—2028</time>
+                <p><strong>Master of Science</strong><br />Computer Science and Technology<br />Nanjing Normal University, China</p>
+              </div>
+            </div>
+            <div class="profile-links">
+              <a href="https://www.linkedin.com/in/mahadihanshan/" rel="me noopener noreferrer" target="_blank">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="https://ieeexplore.ieee.org/author/37089463675" rel="me noopener noreferrer" target="_blank">IEEE Author Profile <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="profile profile-mehran">
+          <div class="profile-content">
+            <p class="label">THE SON</p>
+            <h2>MD Mehran Hasan <em>“Turaj”</em></h2>
+            <p class="profile-lede">The next chapter. Born in Chattogram, carrying the stories of two families into the future.</p>
+            <dl class="birth-record">
+              <div><dt>Date</dt><dd>15 June 2025</dd></div>
+              <div><dt>Time</dt><dd>10:50 AM</dd></div>
+              <div><dt>Place</dt><dd>Chittagong International Medical College Hospital, Shomsher Para</dd></div>
+            </dl>
+            <blockquote>“You are the reason this story has a future tense.”</blockquote>
+          </div>
+          <figure class="profile-image profile-image-child">
+            <Image
+              src={mehranPhoto}
+              alt="Young Mehran Hasan exploring a glowing decorative wall"
+              widths={[560, 840, 1120]}
+              sizes="(max-width: 820px) 100vw, 48vw"
+              loading="lazy"
+              quality={78}
+              format="webp"
+            />
+            <span class="photo-number">02 / SON</span>
+          </figure>
+        </article>
+      </section>
+
+      <section class="roots" id="family">
+        <div class="roots-heading">
+          <p class="label">02 / THE PEOPLE BEFORE US</p>
+          <h2>Our family<br /><em>constellation.</em></h2>
+          <p>Two family lines, held together here so the names remain part of Mehran’s map.</p>
+        </div>
+
+        <div class="family-columns">
+          <section class="family-branch" aria-labelledby="paternal-heading">
+            <header>
+              <p>PATERNAL ROOTS</p>
+              <h3 id="paternal-heading">Ramanandapur</h3>
+              <address>Dorji Bari · Hafez Mobarak Ullah Shaheb er Bari</address>
+            </header>
+            <article class="family-card featured-card">
+              <span class="relation">GRANDFATHER</span>
+              <h4>Hafez Kutub Uddin</h4>
+              <p>A Hafez of the Qur’an and local mosque imam—a life shaped by faith and service.</p>
+            </article>
+            <article class="family-card">
+              <span class="relation">GRANDMOTHER</span>
+              <h4>Umme Hafsa</h4>
+              <p>A homemaker who studied Humanities through HSC. Marriage interrupted the education she had hoped to continue.</p>
+            </article>
+          </section>
+
+          <section class="family-branch maternal" aria-labelledby="maternal-heading">
+            <header>
+              <p>MATERNAL ROOTS</p>
+              <h3 id="maternal-heading">Nabila Tabassum</h3>
+              <address>“Shitol” · Mehran’s biological mother</address>
+            </header>
+            <article class="family-card featured-card">
+              <span class="relation">MOTHER</span>
+              <h4>Nabila Tabassum (Shitol)</h4>
+              <p>HSC in Business Studies from Iqbal Memorial College; Bachelor of Management studies at the same college from 2026.</p>
+            </article>
+            <article class="family-card">
+              <span class="relation">MATERNAL GRANDFATHER</span>
+              <h4>Golam Kibria</h4>
+              <p>A former expatriate and resident of Finland; remembered after his passing.</p>
+            </article>
+            <article class="family-card">
+              <span class="relation">MATERNAL GRANDMOTHER</span>
+              <h4>Rasheda Khatun</h4>
+              <p>Homemaker and owner of Somrat Abashik House in Dagonbhuiyan.</p>
+            </article>
+            <article class="family-card">
+              <span class="relation">MATERNAL UNCLE</span>
+              <h4>Golam Mobarak (Somrat)</h4>
+              <p>A Portuguese citizen living in Switzerland in 2026.</p>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <section class="archive" id="archive">
+        <div class="archive-art" aria-hidden="true">
+          <span class="archive-year">25</span>
+          <span class="archive-ring"></span>
+          <span class="archive-noise">MEMORY · MEMORY · MEMORY</span>
+        </div>
+        <div class="archive-copy">
+          <p class="label">03 / PRIVATE COLLECTION</p>
+          <h2>The living<br /><em>archive.</em></h2>
+          <p>Photographs and videos—small moments preserved outside the public story. The collection opens only with the family password.</p>
+          <button class="button button-light" type="button" data-open-archive>
+            Unlock the archive <span aria-hidden="true">↗</span>
+          </button>
+          <p class="privacy-note"><span aria-hidden="true">●</span> Password protected</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="footer-mark" href="#top">M × M</a>
+      <p>Made as a memory that can be found.</p>
+      <p>Bangladesh <span>·</span> China <span>·</span> Wherever life leads</p>
+    </footer>
+
+    <dialog class="archive-dialog" id="archive-dialog" aria-labelledby="archive-title">
+      <button class="dialog-close" type="button" data-close-archive aria-label="Close archive dialog">×</button>
+      <p class="label">PRIVATE COLLECTION</p>
+      <h2 id="archive-title">Enter the family password.</h2>
+      <p>The password is checked securely. It is never stored in this page.</p>
+      <form id="archive-form">
+        <label for="archive-password">Password</label>
+        <div class="password-row">
+          <input id="archive-password" name="password" type="password" autocomplete="current-password" required />
+          <button type="submit" aria-label="Unlock archive">↗</button>
+        </div>
+        <p class="form-status" id="archive-status" role="status" aria-live="polite"></p>
+      </form>
+    </dialog>
+
+    <script>
+      const dialog = document.querySelector('#archive-dialog');
+      const form = document.querySelector('#archive-form');
+      const passwordInput = document.querySelector('#archive-password');
+      const status = document.querySelector('#archive-status');
+
+      document.querySelectorAll('[data-open-archive]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (dialog instanceof HTMLDialogElement) {
+            dialog.showModal();
+            if (passwordInput instanceof HTMLInputElement) passwordInput.focus();
+          }
+        });
+      });
+
+      document.querySelector('[data-close-archive]')?.addEventListener('click', () => {
+        if (dialog instanceof HTMLDialogElement) dialog.close();
+      });
+
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
+      });
+
+      form?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
+        const submitButton = form.querySelector('button[type="submit"]');
+        const formData = new FormData(form);
+        status.textContent = 'Checking…';
+        if (submitButton instanceof HTMLButtonElement) submitButton.disabled = true;
+
+        try {
+          const response = await fetch('/api/unlock', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: formData.get('password') }),
+          });
+          const result = await response.json() as { url?: string; message?: string };
+          if (!response.ok || !result.url) throw new Error(result.message || 'Incorrect password.');
+          status.textContent = 'Unlocked. Opening the archive…';
+          window.location.assign(result.url);
+        } catch (error) {
+          status.textContent = error instanceof Error ? error.message : 'The archive could not be opened.';
+          if (passwordInput instanceof HTMLInputElement) {
+            passwordInput.select();
+            passwordInput.focus();
+          }
+        } finally {
+          if (submitButton instanceof HTMLButtonElement) submitButton.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
