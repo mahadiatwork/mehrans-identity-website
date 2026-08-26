@@ -24,6 +24,10 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
+
+html.lang-bn body {
+  font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Segoe UI', Arial, sans-serif;
+}
 body::before {
   content: '';
   position: fixed;
@@ -87,6 +91,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   letter-spacing: 0.08em;
   cursor: pointer;
 }
+.language-switch {
+  border: 1px solid var(--red) !important;
+  padding: 8px 10px !important;
+  color: var(--paper);
+}
+.language-switch:hover { background: var(--red); color: white !important; }
 .site-header nav a:hover,
 .nav-archive:hover { color: var(--red); border-color: var(--red); }
 
@@ -145,6 +155,14 @@ h1 em { white-space: nowrap; }
   color: #c7c2b8;
   font-size: clamp(15px, 1.3vw, 19px);
   line-height: 1.65;
+}
+.hero-names {
+  max-width: 620px;
+  margin: 28px 0 -18px;
+  color: var(--red);
+  font: 700 10px/1.5 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .button {
   display: inline-flex;
@@ -478,6 +496,41 @@ footer p span { color: var(--red); }
 .password-row button:disabled { opacity: 0.55; cursor: wait; }
 .form-status { min-height: 20px; margin: 12px 0 0; color: #e99393; font: 700 10px/1.4 var(--mono); }
 
+.lang-bn h1,
+.lang-bn h2,
+.lang-bn h3,
+.lang-bn h4,
+.lang-bn .display-quote,
+.lang-bn .archive-year {
+  font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Segoe UI', Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.lang-bn h1 { line-height: 0.96; }
+.lang-bn h1 em,
+.lang-bn .archive h2 em,
+.lang-bn .roots-heading h2 em {
+  font-family: inherit;
+  font-weight: 800;
+}
+.lang-bn .label,
+.lang-bn .kicker,
+.lang-bn .section-index,
+.lang-bn .photo-number,
+.lang-bn .relation,
+.lang-bn .hero-names,
+.lang-bn .site-header nav a,
+.lang-bn .nav-archive {
+  font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.02em;
+}
+.lang-bn .display-quote em,
+.lang-bn .signature,
+.lang-bn .profile h2 em,
+.lang-bn .profile blockquote {
+  font-family: 'Noto Serif Bengali', 'Noto Sans Bengali', 'Segoe UI', serif;
+}
+
 @media (max-width: 980px) {
   .hero { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr); gap: 30px; }
   h1 { font-size: clamp(54px, 8vw, 80px); }
@@ -488,6 +541,7 @@ footer p span { color: var(--red); }
 
 @media (max-width: 760px) {
   .site-header nav a { display: none; }
+  .site-header nav .language-switch { display: inline-block; }
   .hero { grid-template-columns: 1fr; align-content: center; padding-top: 122px; }
   h1 { font-size: clamp(50px, 15vw, 78px); }
   h1 em { white-space: normal; }
