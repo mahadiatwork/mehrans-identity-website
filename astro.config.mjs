@@ -1,12 +1,11 @@
 import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
+import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
-import { sites } from '@openai/sites-vite-plugin';
 
 export default defineConfig({
-  site: 'https://mahadi-mehran-legacy.dflores537339.chatgpt.site',
+  site: 'https://md-mehran-hasan-turaj.vercel.app',
   output: 'server',
-  adapter: cloudflare(),
+  adapter: vercel(),
   integrations: [
     sitemap({
       i18n: {
@@ -24,7 +23,4 @@ export default defineConfig({
       },
     }),
   ],
-  vite: {
-    plugins: [sites()],
-  },
 });

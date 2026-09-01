@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
@@ -20,8 +19,7 @@ function equalBytes(left: Uint8Array, right: Uint8Array): boolean {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const runtimeEnv = env as unknown as Record<string, string | undefined>;
-  const configuredPassword = runtimeEnv.ARCHIVE_PASSWORD ?? import.meta.env.ARCHIVE_PASSWORD;
+  const configuredPassword = import.meta.env.ARCHIVE_PASSWORD ?? process.env.ARCHIVE_PASSWORD;
 
   if (!configuredPassword) {
     return Response.json(
