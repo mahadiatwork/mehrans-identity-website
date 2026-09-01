@@ -15,7 +15,6 @@ const siteOrigin = 'https://mahadi-mehran-legacy.dflores537339.chatgpt.site';
 const englishUrl = `${siteOrigin}/`;
 const banglaUrl = `${siteOrigin}/bn/`;
 const canonical = isBn ? banglaUrl : englishUrl;
-const alternateUrl = isBn ? englishUrl : banglaUrl;
 const ogImage = `${siteOrigin}/og.png`;
 
 const copy = isBn ? {
@@ -26,8 +25,7 @@ const copy = isBn ? {
   legacyNav: 'উত্তরাধিকার',
   familyNav: 'পরিবার',
   archiveNav: 'আর্কাইভ',
-  languageLabel: 'English',
-  languageAria: 'Read this page in English',
+  languageToggleAria: 'ভাষা নির্বাচন করুন',
   established: 'শুরু',
   heroTitle: 'দূরত্ব পেরিয়েও',
   heroOutline: 'বেঁচে থাকা গল্প।',
@@ -76,13 +74,15 @@ const copy = isBn ? {
   maternalTitle: 'দাগনভূঞা, ফেনী',
   maternalAddress: 'সরকারি হাসপাতালের সামনে · সম্রাট আবাসিক',
   paternalCards: [
-    { relation: 'দাদা', name: 'হাফেজ কুতুব উদ্দিন', text: 'কুরআনের হাফেজ এবং স্থানীয় মসজিদের ইমাম—বিশ্বাস, শিক্ষা ও মানুষের সেবায় নিবেদিত জীবন।' },
-    { relation: 'দাদি', name: 'উম্মে হাফসা', text: 'গৃহিণী; মানবিক বিভাগে এইচএসসি পর্যন্ত পড়াশোনা করেছেন। বিয়ের পর তাঁর পড়াশোনা আর চালিয়ে যাওয়া সম্ভব হয়নি।' },
+    { relation: 'দাদা', name: 'হাফেজ কুতুব উদ্দিন', text: 'কুরআনের হাফেজ এবং সৌদি আরবে ২৬ বছর প্রবাসী ছিলেন। পরিবারকে স্বচ্ছল রাখতে তিনি অক্লান্ত পরিশ্রম করেছেন এবং নিজের কষ্টার্জিত অর্থে শূন্য থেকে পারিবারিক বাড়িটি নির্মাণ করেছেন। ২০১৯ সালে স্ট্রোক করার পর তিনি স্থায়ীভাবে বাংলাদেশে ফিরে আসেন।' },
+    { relation: 'দাদি', name: 'উম্মে হাফসা (কুসুম)', text: 'গৃহিণী; মানবিক বিভাগে এইচএসসি পর্যন্ত পড়াশোনা করেছেন। বিয়ের পর তাঁর পড়াশোনা আর চালিয়ে যাওয়া সম্ভব হয়নি।' },
+    { relation: 'পিতৃকুলের প্রপিতামহ', name: 'হাফেজ মোবারক উল্লাহ', text: 'কুরআনের হাফেজ ও একজন ইমাম ছিলেন। তিনি কুরআন মুখস্থ থেকে তারাবিহর নামাজে ইমামতি করতেন এবং রামানন্দপুরে বলি হুজুর নামে পরিচিত ছিলেন।' },
+    { relation: 'পিতৃকুলের প্রপিতামহ', name: 'মাস্টার আবদুল মতিন', text: 'মাতুনভূঞা সরকারি মেডিকেল হলের কাছে সওদাগর বাড়ির একজন প্রাথমিক বিদ্যালয়ের শিক্ষক ছিলেন। সততা ও ধর্মপরায়ণতার জন্য তিনি সুপরিচিত ছিলেন।' },
   ],
   maternalCards: [
     { relation: 'মা', name: 'নাবিলা তাবাসসুম (শীতল)', text: 'ইকবাল মেমোরিয়াল কলেজ থেকে ব্যবসায় শিক্ষা বিভাগে এইচএসসি; ২০২৬ সাল থেকে একই কলেজে ব্যাচেলর অব ম্যানেজমেন্টে অধ্যয়ন।' },
     { relation: 'নানা', name: 'গোলাম কিবরিয়া (শাবু)', text: 'ফিনল্যান্ডের প্রবাসী ও বাসিন্দা ছিলেন; মৃত্যুর পরও পরিবারের স্মৃতিতে অমলিন।', facebook: 'https://www.facebook.com/golamkibria.shavu' },
-    { relation: 'নানি', name: 'রাশেদা খাতুন', text: 'গৃহিণী এবং দাগনভূঞার সরকারি হাসপাতালের সামনে অবস্থিত সম্রাট আবাসিকের মালিক।' },
+    { relation: 'নানি', name: 'রাশেদা আক্তার (রিতু)', text: 'গৃহিণী এবং দাগনভূঞার সরকারি হাসপাতালের সামনে অবস্থিত সম্রাট আবাসিকের মালিক।' },
     { relation: 'মামা', name: 'গোলাম মোবারক (সম্রাট)', text: 'পর্তুগালের নাগরিক; ২০২৬ সালে সুইজারল্যান্ডে বসবাসরত।' },
   ],
   archiveLabel: '০৩ / ব্যক্তিগত সংগ্রহ',
@@ -110,8 +110,7 @@ const copy = isBn ? {
   legacyNav: 'Legacy',
   familyNav: 'Family',
   archiveNav: 'Archive',
-  languageLabel: 'বাংলা',
-  languageAria: 'বাংলায় এই পৃষ্ঠা পড়ুন',
+  languageToggleAria: 'Choose language',
   established: 'EST.',
   heroTitle: 'A story that',
   heroOutline: 'outlives distance.',
@@ -313,7 +312,10 @@ const schema = {
         <a href="#legacy">{copy.legacyNav}</a>
         <a href="#family">{copy.familyNav}</a>
         <button class="nav-archive" type="button" data-open-archive>{copy.archiveNav} <span aria-hidden="true">↗</span></button>
-        <a class="language-switch" href={alternateUrl} lang={isBn ? 'en' : 'bn'} hreflang={isBn ? 'en' : 'bn-BD'} aria-label={copy.languageAria}>{copy.languageLabel}</a>
+        <div class="language-toggle" role="group" aria-label={copy.languageToggleAria}>
+          <a href="/" lang="en" hreflang="en" aria-current={!isBn ? 'page' : undefined}>English</a>
+          <a href="/bn/" lang="bn" hreflang="bn-BD" aria-current={isBn ? 'page' : undefined}>বাংলা</a>
+        </div>
       </nav>
     </header>
 
