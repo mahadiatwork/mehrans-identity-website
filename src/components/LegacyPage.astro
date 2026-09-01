@@ -81,7 +81,7 @@ const copy = isBn ? {
   ],
   maternalCards: [
     { relation: 'মা', name: 'নাবিলা তাবাসসুম (শীতল)', text: 'ইকবাল মেমোরিয়াল কলেজ থেকে ব্যবসায় শিক্ষা বিভাগে এইচএসসি; ২০২৬ সাল থেকে একই কলেজে ব্যাচেলর অব ম্যানেজমেন্টে অধ্যয়ন।' },
-    { relation: 'নানা', name: 'গোলাম কিবরিয়া', text: 'ফিনল্যান্ডের প্রবাসী ও বাসিন্দা ছিলেন; মৃত্যুর পরও পরিবারের স্মৃতিতে অমলিন।' },
+    { relation: 'নানা', name: 'গোলাম কিবরিয়া (শাবু)', text: 'ফিনল্যান্ডের প্রবাসী ও বাসিন্দা ছিলেন; মৃত্যুর পরও পরিবারের স্মৃতিতে অমলিন।', facebook: 'https://www.facebook.com/golamkibria.shavu' },
     { relation: 'নানি', name: 'রাশেদা খাতুন', text: 'গৃহিণী এবং দাগনভূঞার সরকারি হাসপাতালের সামনে অবস্থিত সম্রাট আবাসিকের মালিক।' },
     { relation: 'মামা', name: 'গোলাম মোবারক (সম্রাট)', text: 'পর্তুগালের নাগরিক; ২০২৬ সালে সুইজারল্যান্ডে বসবাসরত।' },
   ],
@@ -165,7 +165,7 @@ const copy = isBn ? {
   ],
   maternalCards: [
     { relation: 'Mother', name: 'Nabila Tabassum (Shitol)', text: 'HSC in Business Studies from Iqbal Memorial College; Bachelor of Management studies at the same college from 2026.' },
-    { relation: 'Maternal grandfather', name: 'Golam Kibria', text: 'A former expatriate and resident of Finland; remembered after his passing.' },
+    { relation: 'Maternal grandfather', name: 'Golam Kibria (Shabu)', text: 'A former expatriate and resident of Finland; remembered after his passing.', facebook: 'https://www.facebook.com/golamkibria.shavu' },
     { relation: 'Maternal grandmother', name: 'Rasheda Akter (Ritu)', text: 'Homemaker and owner of Somrat Abashik, opposite the Government Hospital in Dagonbhuiyan.' },
     { relation: 'Maternal uncle', name: 'Golam Mobarak (Somrat)', text: 'A Portuguese citizen living in Switzerland in 2026.' },
   ],
@@ -417,6 +417,9 @@ const schema = {
             {copy.maternalCards.map((card, index) => (
               <article class:list={['family-card', { 'featured-card': index === 0 }]}>
                 <span class="relation">{card.relation}</span><h4>{card.name}</h4><p>{card.text}</p>
+                {'facebook' in card && card.facebook && (
+                  <a class="family-link" href={card.facebook} rel="noopener noreferrer" target="_blank">Facebook <span aria-hidden="true">↗</span></a>
+                )}
               </article>
             ))}
           </section>
