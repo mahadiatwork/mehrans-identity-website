@@ -80,6 +80,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .wordmark span:last-child { color: var(--red); }
 .site-header nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }
 .site-header nav a,
+.nav-tree,
 .nav-archive {
   border: 0;
   border-bottom: 1px solid var(--rule-light);
@@ -108,6 +109,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .site-header nav .language-toggle a:not([aria-current='page']):hover { background: rgba(177, 18, 18, 0.2); color: white; }
 .site-header nav a:hover,
+.nav-tree:hover,
 .nav-archive:hover { color: var(--red); border-color: var(--red); }
 
 .hero {
@@ -497,6 +499,114 @@ footer p:last-child { text-align: right; }
 footer p span { color: var(--red); }
 .footer-mark { color: var(--paper); font: 900 34px/.8 var(--display); letter-spacing: -0.08em; text-decoration: none; }
 
+.tree-dialog {
+  width: min(1160px, calc(100% - 28px));
+  max-height: calc(100svh - 28px);
+  overflow: auto;
+  padding: clamp(28px, 4.5vw, 64px);
+  border: 1px solid #3a3936;
+  background: #11110f;
+  color: var(--paper);
+  box-shadow: 14px 14px 0 var(--red);
+}
+.tree-dialog::backdrop,
+.archive-dialog::backdrop { background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(5px); }
+.tree-dialog-heading { max-width: 760px; margin-bottom: clamp(32px, 5vw, 60px); }
+.tree-dialog-heading h2 { margin: 0; font: 900 clamp(42px, 6vw, 82px)/0.9 var(--display); letter-spacing: -0.065em; text-transform: uppercase; }
+.tree-dialog-heading > p:not(.label) { max-width: 680px; margin: 22px 0 0; color: #aaa69e; font-size: 15px; line-height: 1.6; }
+.ancestry-tree { --tree-line: #5a5650; }
+.tree-families {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 36px);
+  padding-bottom: 48px;
+}
+.tree-families::before {
+  content: '';
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: 24px;
+  border-top: 1px solid var(--tree-line);
+}
+.tree-families::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 24px;
+  border-left: 1px solid var(--tree-line);
+}
+.tree-branch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(18px, 2.5vw, 30px);
+  border: 1px solid #34322f;
+  background: #181815;
+}
+.tree-branch::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -25px;
+  height: 24px;
+  border-left: 1px solid var(--tree-line);
+}
+.tree-branch h3 {
+  margin: 0 0 26px;
+  color: var(--red);
+  font: 800 11px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.tree-lineage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 2vw, 20px); }
+.tree-lineage { display: grid; grid-template-rows: auto 34px auto; min-width: 0; }
+.tree-stem { justify-self: center; width: 1px; height: 34px; background: var(--tree-line); }
+.tree-person {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 88px;
+  padding: 15px;
+  border: 1px solid #4a4741;
+  background: #0e0e0d;
+  text-align: center;
+}
+.tree-person span { color: #9c978e; font: 700 8px/1.35 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; }
+.tree-person strong { margin-top: 8px; font: 800 clamp(15px, 1.65vw, 22px)/1.08 var(--display); letter-spacing: -0.03em; }
+.tree-person small { margin-top: 7px; color: #aaa69e; font-size: 11px; }
+.tree-couple { align-items: start; }
+.tree-to-parent { margin-top: auto; }
+.tree-join { position: relative; display: block; height: 50px; }
+.tree-join::before {
+  content: '';
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 0;
+  border-top: 1px solid var(--tree-line);
+}
+.tree-join::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--tree-line);
+}
+.tree-parent { width: min(78%, 350px); margin-inline: auto; border-color: var(--red-dark); background: #21100f; }
+.tree-child { position: relative; display: grid; place-items: center; padding-top: 34px; }
+.tree-child::before { content: ''; position: absolute; left: 50%; top: 0; height: 34px; border-left: 1px solid var(--tree-line); }
+.tree-person-child { width: min(460px, 100%); min-height: 112px; border: 2px solid var(--red); background: var(--red); color: white; }
+.tree-person-child span,
+.tree-person-child small { color: #f7cccc; }
+.tree-person-child strong { font-size: clamp(24px, 3vw, 40px); }
+
 .archive-dialog {
   width: min(610px, calc(100% - 28px));
   padding: clamp(30px, 5vw, 60px);
@@ -505,7 +615,6 @@ footer p span { color: var(--red); }
   color: var(--paper);
   box-shadow: 14px 14px 0 var(--red);
 }
-.archive-dialog::backdrop { background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(5px); }
 .archive-dialog h2 { max-width: 470px; margin: 0; font: 900 clamp(36px, 6vw, 62px)/0.94 var(--display); letter-spacing: -0.06em; text-transform: uppercase; }
 .archive-dialog > p:not(.label) { max-width: 430px; color: #aaa69e; font-size: 14px; line-height: 1.55; }
 .dialog-close { position: absolute; right: 16px; top: 12px; border: 0; background: transparent; font-size: 28px; cursor: pointer; }
@@ -542,6 +651,7 @@ footer p span { color: var(--red); }
 .lang-bn .relation,
 .lang-bn .hero-names,
 .lang-bn .site-header nav a,
+.lang-bn .nav-tree,
 .lang-bn .nav-archive {
   font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Segoe UI', Arial, sans-serif;
   letter-spacing: 0.02em;
@@ -565,6 +675,12 @@ footer p span { color: var(--red); }
   .site-header nav a { display: none; }
   .site-header nav .language-toggle a { display: flex; }
   .site-header .nav-archive { display: none; }
+  .tree-dialog { padding: 42px 16px 24px; box-shadow: 8px 8px 0 var(--red); }
+  .tree-families { grid-template-columns: 1fr; padding-bottom: 30px; }
+  .tree-families::before,
+  .tree-branch::after { display: none; }
+  .tree-families::after { height: 30px; }
+  .tree-person { padding: 12px 9px; }
   .hero { grid-template-columns: 1fr; align-content: center; padding-top: 122px; }
   h1 { font-size: clamp(50px, 15vw, 78px); }
   h1 em { white-space: normal; }

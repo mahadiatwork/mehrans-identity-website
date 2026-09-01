@@ -24,6 +24,7 @@ const copy = isBn ? {
   navLabel: 'প্রধান নেভিগেশন',
   legacyNav: 'উত্তরাধিকার',
   familyNav: 'পরিবার',
+  treeNav: 'বংশবৃক্ষ',
   archiveNav: 'আর্কাইভ',
   languageToggleAria: 'ভাষা নির্বাচন করুন',
   established: 'শুরু',
@@ -82,9 +83,16 @@ const copy = isBn ? {
   maternalCards: [
     { relation: 'মা', name: 'নাবিলা তাবাচ্ছুম (শীতল)', text: 'ইকবাল মেমোরিয়াল কলেজ থেকে ব্যবসায় শিক্ষা বিভাগে এইচএসসি; ২০২৬ সাল থেকে একই কলেজে ব্যাচেলর অব ম্যানেজমেন্টে অধ্যয়ন।' },
     { relation: 'নানা', name: 'গোলাম কিবরিয়া (শাবু)', text: 'ফিনল্যান্ডের প্রবাসী ও বাসিন্দা ছিলেন; মৃত্যুর পরও পরিবারের স্মৃতিতে অমলিন।', facebook: 'https://www.facebook.com/golamkibria.shavu' },
-    { relation: 'নানি', name: 'রাশেদা আক্তার (রিতু)', text: 'গৃহিণী এবং দাগনভূঞার সরকারি হাসপাতালের সামনে অবস্থিত সম্রাট আবাসিকের মালিক।' },
+    { relation: 'নানি', name: 'রাশেদা আক্তার (রিটু)', text: 'গৃহিণী এবং দাগনভূঞার সরকারি হাসপাতালের সামনে অবস্থিত সম্রাট আবাসিকের মালিক।' },
     { relation: 'মামা', name: 'গোলাম মোবারক (সম্রাট)', text: 'পর্তুগালের নাগরিক; ২০২৬ সালে সুইজারল্যান্ডে বসবাসরত।' },
   ],
+  treeDialogEyebrow: 'মেহরানের বংশপরিচয়',
+  treeDialogTitle: 'পারিবারিক বংশবৃক্ষ',
+  treeDialogText: 'পিতৃকুল ও মাতৃকুল—দুই পরিবারের পূর্বপুরুষদের ধারা মেহরানের বাবা-মায়ের মাধ্যমে তাঁর কাছে এসে মিলেছে।',
+  paternalTreeLabel: 'পিতৃকুল',
+  maternalTreeLabel: 'মাতৃকুল',
+  treeChildLabel: 'দুই পরিবারের পরবর্তী প্রজন্ম',
+  closeTreeDialog: 'পারিবারিক বংশবৃক্ষ বন্ধ করুন',
   archiveLabel: '০৩ / ব্যক্তিগত সংগ্রহ',
   archiveTitle: 'জীবন্ত',
   archiveOutline: 'আর্কাইভ।',
@@ -109,6 +117,7 @@ const copy = isBn ? {
   navLabel: 'Primary navigation',
   legacyNav: 'Legacy',
   familyNav: 'Family',
+  treeNav: 'Tree',
   archiveNav: 'Archive',
   languageToggleAria: 'Choose language',
   established: 'EST.',
@@ -170,6 +179,13 @@ const copy = isBn ? {
     { relation: 'Maternal grandmother', name: 'Rasheda Akter (Ritu)', text: 'Homemaker and owner of Somrat Abashik, opposite the Government Hospital in Dagonbhuiyan.' },
     { relation: 'Maternal uncle', name: 'Golam Mobarak (Somrat)', text: 'A Portuguese citizen living in Switzerland in 2026.' },
   ],
+  treeDialogEyebrow: 'Mehran’s ancestry',
+  treeDialogTitle: 'Family tree',
+  treeDialogText: 'Two ancestral lines—paternal and maternal—meet through Mehran’s parents and continue with him.',
+  paternalTreeLabel: 'Paternal family',
+  maternalTreeLabel: 'Maternal family',
+  treeChildLabel: 'The next generation of both families',
+  closeTreeDialog: 'Close family tree',
   archiveLabel: '03 / Private collection',
   archiveTitle: 'The living',
   archiveOutline: 'archive.',
@@ -311,6 +327,7 @@ const schema = {
       <nav aria-label={copy.navLabel}>
         <a href="#legacy">{copy.legacyNav}</a>
         <a href="#family">{copy.familyNav}</a>
+        <button class="nav-tree" type="button" data-open-tree>{copy.treeNav}</button>
         <button class="nav-archive" type="button" data-open-archive>{copy.archiveNav} <span aria-hidden="true">↗</span></button>
         <div class="language-toggle" role="group" aria-label={copy.languageToggleAria}>
           <a href="/" lang="en" hreflang="en" aria-current={!isBn ? 'page' : undefined}>English</a>
@@ -448,6 +465,84 @@ const schema = {
       <p>{copy.footerPlaces}</p>
     </footer>
 
+    <dialog class="tree-dialog" id="tree-dialog" aria-labelledby="tree-title" aria-describedby="tree-description">
+      <button class="dialog-close" type="button" data-close-tree aria-label={copy.closeTreeDialog}>×</button>
+      <div class="tree-dialog-heading">
+        <p class="label">{copy.treeDialogEyebrow}</p>
+        <h2 id="tree-title">{copy.treeDialogTitle}</h2>
+        <p id="tree-description">{copy.treeDialogText}</p>
+      </div>
+
+      <div class="ancestry-tree">
+        <div class="tree-families">
+          <section class="tree-branch tree-paternal" aria-labelledby={`tree-paternal-${locale}`}>
+            <h3 id={`tree-paternal-${locale}`}>{copy.paternalTreeLabel}</h3>
+            <div class="tree-lineage-grid">
+              <div class="tree-lineage">
+                <article class="tree-person">
+                  <span>{copy.paternalCards[2].relation}</span>
+                  <strong>{copy.paternalCards[2].name}</strong>
+                </article>
+                <i class="tree-stem" aria-hidden="true"></i>
+                <article class="tree-person">
+                  <span>{copy.paternalCards[0].relation}</span>
+                  <strong>{copy.paternalCards[0].name}</strong>
+                </article>
+              </div>
+              <div class="tree-lineage">
+                <article class="tree-person">
+                  <span>{copy.paternalCards[3].relation}</span>
+                  <strong>{copy.paternalCards[3].name}</strong>
+                </article>
+                <i class="tree-stem" aria-hidden="true"></i>
+                <article class="tree-person">
+                  <span>{copy.paternalCards[1].relation}</span>
+                  <strong>{copy.paternalCards[1].name}</strong>
+                </article>
+              </div>
+            </div>
+            <div class="tree-to-parent">
+              <i class="tree-join" aria-hidden="true"></i>
+              <article class="tree-person tree-parent">
+                <span>{copy.fatherLabel}</span>
+                <strong>{copy.fatherName}</strong>
+                <small>{copy.fatherNickname}</small>
+              </article>
+            </div>
+          </section>
+
+          <section class="tree-branch tree-maternal" aria-labelledby={`tree-maternal-${locale}`}>
+            <h3 id={`tree-maternal-${locale}`}>{copy.maternalTreeLabel}</h3>
+            <div class="tree-lineage-grid tree-couple">
+              <article class="tree-person">
+                <span>{copy.maternalCards[1].relation}</span>
+                <strong>{copy.maternalCards[1].name}</strong>
+              </article>
+              <article class="tree-person">
+                <span>{copy.maternalCards[2].relation}</span>
+                <strong>{copy.maternalCards[2].name}</strong>
+              </article>
+            </div>
+            <div class="tree-to-parent">
+              <i class="tree-join" aria-hidden="true"></i>
+              <article class="tree-person tree-parent">
+                <span>{copy.maternalCards[0].relation}</span>
+                <strong>{copy.maternalCards[0].name}</strong>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="tree-child">
+          <article class="tree-person tree-person-child">
+            <span>{copy.treeChildLabel}</span>
+            <strong>{copy.sonName}</strong>
+            <small>{copy.sonNickname}</small>
+          </article>
+        </div>
+      </div>
+    </dialog>
+
     <dialog class="archive-dialog" id="archive-dialog" aria-labelledby="archive-title">
       <button class="dialog-close" type="button" data-close-archive aria-label={copy.closeDialog}>×</button>
       <p class="label">{copy.privateCollection}</p>
@@ -465,7 +560,18 @@ const schema = {
       const form = document.querySelector('#archive-form');
       const passwordInput = document.querySelector('#archive-password');
       const status = document.querySelector('#archive-status');
+      const treeDialog = document.querySelector('#tree-dialog');
       const isBangla = document.documentElement.lang === 'bn';
+
+      document.querySelectorAll('[data-open-tree]').forEach((button) => button.addEventListener('click', () => {
+        if (treeDialog instanceof HTMLDialogElement) {
+          treeDialog.showModal();
+          const closeButton = treeDialog.querySelector('[data-close-tree]');
+          if (closeButton instanceof HTMLButtonElement) closeButton.focus();
+        }
+      }));
+      document.querySelector('[data-close-tree]')?.addEventListener('click', () => { if (treeDialog instanceof HTMLDialogElement) treeDialog.close(); });
+      treeDialog?.addEventListener('click', (event) => { if (event.target === treeDialog && treeDialog instanceof HTMLDialogElement) treeDialog.close(); });
 
       document.querySelectorAll('[data-open-archive]').forEach((button) => button.addEventListener('click', () => {
         if (dialog instanceof HTMLDialogElement) {
